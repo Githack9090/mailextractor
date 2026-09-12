@@ -3,34 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Mio Prodotto Digitale</title>
+    <title>Nome del tuo Progetto</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f6; color: #333; text-align: center; padding: 50px 20px; }
-        .card { background: white; max-width: 450px; margin: 0 auto; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h1 { margin-bottom: 10px; color: #111; }
-        .price { font-size: 24px; font-weight: bold; color: #2ecc71; margin: 20px 0; }
-        .btn { display: inline-block; background-color: #0070ba; color: white; padding: 14px 30px; text-decoration: none; font-weight: bold; border-radius: 30px; transition: background 0.2s; margin-top: 10px; }
-        .btn:hover { background-color: #005ea6; }
-        .btn-stripe { background-color: #635bff; }
-        .btn-stripe:hover { background-color: #4b45ce; }
+        /* Reset e Stili Base (Stile Apple) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #1d1d1f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Barra di Navigazione Minimal */
+        .navbar {
+            width: 100%;
+            height: 48px;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+            z-index: 100;
+        }
+
+        .brand {
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: -0.01em;
+        }
+
+        .badge {
+            font-size: 12px;
+            background-color: #f5f5f7;
+            padding: 4px 10px;
+            border-radius: 12px;
+            color: #86868b;
+            font-weight: 500;
+        }
+
+        /* Contenitore Principale (Hero Section) */
+        .hero {
+            margin-top: 120px; /* Spazio per la navbar */
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title {
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.07;
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            font-weight: 400;
+            color: #86868b;
+            letter-spacing: -0.015em;
+            line-height: 1.3;
+            max-width: 600px;
+            margin-bottom: 32px;
+        }
+
+        /* Bottone Call to Action */
+        .cta-btn {
+            background-color: #0071e3;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 12px 22px;
+            border-radius: 980px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s ease;
+            margin-bottom: 64px;
+        }
+
+        .cta-btn:hover {
+            background-color: #0077ed;
+        }
+
+        /* Contenitore Immagine GUI con effetto Mac */
+        .gui-container {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            border-radius: 12px;
+            /* Ombra morbida e profonda in perfetto stile Apple */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 
+                        0 1px 3px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 80px;
+            /* Animazione d'ingresso fluida */
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Mockup dei tre pallini stile finestra Mac */
+        .window-header {
+            height: 28px;
+            background-color: #f5f5f7;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            padding-left: 16px;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .dot.red { background-color: #ff5f56; }
+        .dot.yellow { background-color: #ffbd2e; }
+        .dot.green { background-color: #27c93f; }
+
+        /* L'immagine PNG effettiva */
+        .gui-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Animazione CSS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Ottimizzazione per Smartphone */
+        @media (max-width: 768px) {
+            .title { font-size: 40px; }
+            .subtitle { font-size: 20px; }
+            .hero { margin-top: 90px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <!-- Puoi cambiare il titolo e la descrizione qui sotto -->
-        <h1>Il Mio Prodotto</h1>
-        <p>Inserisci qui la descrizione accattivante del tuo file, ebook, corso o servizio digitale.</p>
-        
-        <div class="price">€19,99</div>
+    <!-- Barra di Navigazione -->
+    <nav class="navbar">
+        <div class="brand">NomeProgetto</div>
+        <div class="badge">In Arrivo</div>
+    </nav>
 
-        <!-- SOSTITUISCI I LINK QUI SOTTO CON I TUOI GENERATI AL PASSO 1 -->
-        <a href="INSERISCI_QUI_IL_TUO_LINK_PAYPAL" class="btn" target="_blank">Paga con PayPal</a>
+    <!-- Contenuto della Pagina -->
+    <main class="hero">
+        <h1 class="title">La tua prossima app.<br>Semplice. Potente.</h1>
+        <p class="subtitle">Una descrizione breve e d'impatto di quello che fa la tua GUI. Spiega il valore principale in una sola riga.</p>
         
-        <!-- Se usi anche Stripe, scommenta o usa questo pulsante:
-        <a href="INSERISCI_QUI_IL_TUO_LINK_STRIPE" class="btn btn-stripe" target="_blank">Paga con Carta (Stripe)</a> 
-        -->
-    </div>
+        <a href="#" class="cta-btn">Scopri di più</a>
+
+        <!-- Finestra Mockup con la tua PNG -->
+        <div class="gui-container">
+            <div class="window-header">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+            </div>
+            <!-- NOTA: Sostituisci "la-tua-foto.png" con il nome esatto del tuo file PNG -->
+            <img src="Emailextractor.png" alt="Anteprima dell'interfaccia" class="gui-image">
+        </div>
+    </main>
 
 </body>
 </html>
