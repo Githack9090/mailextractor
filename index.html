@@ -25,7 +25,7 @@
             width: 100%;
         }
 
-        /* Contenitore Globale per riparare il flusso su Safari macOS */
+        /* Contenitore Globale */
         .page-wrapper {
             width: 100%;
             display: flex;
@@ -115,7 +115,7 @@
             background-color: #0077ed;
         }
 
-        /* Contenitore Immagine GUI con effetto Mac */
+        /* Contenitore Immagine GUI */
         .gui-container {
             width: 100%;
             max-width: 900px;
@@ -154,9 +154,9 @@
             display: block;
         }
 
-        /* SEZIONE BLU SCURO PER IL FORM (Forzata in fondo alla pagina) */
+        /* SEZIONE BLU SCURO PER IL FORM */
         .dark-section {
-            width: 100vw; /* Copre l'intera larghezza della finestra */
+            width: 100vw;
             background-color: #001d3d;
             padding: 90px 24px;
             display: flex;
@@ -273,7 +273,6 @@
             <h1 class="title">La tua prossima app.<br>Semplice. Potente.</h1>
             <p class="subtitle">Scandaglia fiumi di file in secondi. Le tue mail sono qui, pronte ed ordinate.</p>
             
-            <!-- Pulsante di scroll -->
             <a href="#iscrizione" class="scroll-btn">Richiedilo ora</a>
 
             <!-- Finestra Mockup -->
@@ -287,12 +286,12 @@
             </div>
         </main>
 
-        <!-- SEZIONE BLU SCURO (Corretta e visibile al 100% su Mac) -->
+        <!-- SEZIONE BLU SCURO PER IL FORM -->
         <section id="iscrizione" class="dark-section">
             <h2>Richiedi l'accesso in anteprima</h2>
             <p>Inserisci i tuoi dati qui sotto. Sarai tra i primi a provare la potenza di Umail.</p>
 
-            <form action="https://formspree.io" method="POST" class="elegant-form">
+            <form id="lead-form" action="https://formspree.io" method="POST" class="elegant-form">
                 <div class="form-group">
                     <label for="name">Nome completo</label>
                     <input type="text" id="name" name="name" class="elegant-input" placeholder="Es. Mario Rossi" required>
@@ -309,5 +308,27 @@
 
     </div>
 
-</body>
-</html>
+    <script>
+        document.getElementById('lead-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = new FormData(form);
+
+            try {
+                // Forza esplicitamente il metodo POST e invia gli header corretti richiesti da Formspree
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Reindirizza l'utente alla pagina di ringraziamento standard di Formspree dopo il successo
+                    window.location.href = "https://formspree.io";
+                } else {
+                    alert("Si è verificato un problema con l'invio. Verifica i dati e riprova.");
+                }
+            } catch (error) {
+                alert("Errore di connessione. Controlla la tua rete.");}});
