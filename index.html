@@ -115,7 +115,7 @@
             background-color: #0077ed;
         }
 
-        /* Contenitore Immagine GUI */
+        /* Contenitore Immagine GUI con effetto Mac */
         .gui-container {
             width: 100%;
             max-width: 900px;
@@ -181,7 +181,7 @@
             line-height: 1.4;
         }
 
-        /* Form Strutturato */
+        /* Form Elegante (Codice nativo Formspree senza JS) */
         .elegant-form {
             width: 100%;
             max-width: 400px;
@@ -205,7 +205,7 @@
             letter-spacing: 0.02em;
         }
 
-        .elegant-input {
+        .elegant-input, .elegant-textarea {
             width: 100%;
             padding: 14px 16px;
             font-size: 16px;
@@ -217,11 +217,17 @@
             transition: border-color 0.2s, background-color 0.2s;
         }
 
-        .elegant-input::placeholder {
+        .elegant-textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .elegant-input::placeholder, .elegant-textarea::placeholder {
             color: rgba(255, 255, 255, 0.4);
         }
 
-        .elegant-input:focus {
+        .elegant-input:focus, .elegant-textarea:focus {
             border-color: #0071e3;
             background-color: rgba(255, 255, 255, 0.12);
         }
@@ -286,49 +292,27 @@
             </div>
         </main>
 
-        <!-- SEZIONE BLU SCURO PER IL FORM -->
+        <!-- SEZIONE BLU SCURO CON IL TUO CODICE FORMSPREE NATIVO -->
         <section id="iscrizione" class="dark-section">
             <h2>Richiedi l'accesso in anteprima</h2>
             <p>Inserisci i tuoi dati qui sotto. Sarai tra i primi a provare la potenza di Umail.</p>
 
-            <form id="lead-form" action="https://formspree.io" method="POST" class="elegant-form">
+            <form action="https://formspree.io/f/mrpgnoep" method="POST" class="elegant-form">
                 <div class="form-group">
-                    <label for="name">Nome completo</label>
-                    <input type="text" id="name" name="name" class="elegant-input" placeholder="Es. Mario Rossi" required>
+                    <label for="email">Your email:</label>
+                    <input type="email" id="email" name="email" class="elegant-input" placeholder="mario@esempio.com" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">Indirizzo Email</label>
-                    <input type="email" id="email" name="email" class="elegant-input" placeholder="Es. mario@esempio.com" required>
+                    <label for="message">Your message:</label>
+                    <textarea id="message" name="message" class="elegant-textarea" placeholder="Scrivi qui il tuo messaggio..." required></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn">Invia richiesta</button>
+                <button type="submit" class="submit-btn">Send</button>
             </form>
         </section>
 
     </div>
 
-    <script>
-        document.getElementById('lead-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const form = e.target;
-            const data = new FormData(form);
-
-            try {
-                // Forza esplicitamente il metodo POST e invia gli header corretti richiesti da Formspree
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    // Reindirizza l'utente alla pagina di ringraziamento standard di Formspree dopo il successo
-                    window.location.href = "https://formspree.io";
-                } else {
-                    alert("Si è verificato un problema con l'invio. Verifica i dati e riprova.");
-                }
-            } catch (error) {
-                alert("Errore di connessione. Controlla la tua rete.");}});
+</body>
+</html>
