@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nome del tuo Progetto</title>
+    <title>Umail - Richiedilo Ora</title>
     <style>
         /* Reset e Stili Base (Stile Apple) */
         * {
@@ -97,6 +97,8 @@
             display: inline-block;
             transition: background-color 0.2s ease;
             margin-bottom: 64px;
+            cursor: pointer;
+            border: none;
         }
 
         .cta-btn:hover {
@@ -109,13 +111,11 @@
             max-width: 900px;
             background: #ffffff;
             border-radius: 12px;
-            /* Ombra morbida e profonda in perfetto stile Apple */
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 
                         0 1px 3px rgba(0, 0, 0, 0.04);
             border: 1px solid rgba(0, 0, 0, 0.1);
             overflow: hidden;
             margin-bottom: 80px;
-            /* Animazione d'ingresso fluida */
             animation: fadeInUp 1s ease-out;
         }
 
@@ -139,11 +139,37 @@
         .dot.yellow { background-color: #ffbd2e; }
         .dot.green { background-color: #27c93f; }
 
-        /* L'immagine PNG effettiva */
         .gui-image {
             width: 100%;
             height: auto;
             display: block;
+        }
+
+        /* Banner di Notifica in Stile Apple */
+        .toast-notification {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: #1d1d1f;
+            padding: 14px 28px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            z-index: 1000;
+            transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast-notification.show {
+            top: 24px;
         }
 
         /* Animazione CSS */
@@ -174,12 +200,18 @@
         <div class="badge">In Arrivo</div>
     </nav>
 
+    <!-- Banner di Notifica Invisibile per impostazione predefinita -->
+    <div id="notification" class="toast-notification">
+        <span>✅</span> Richiesta inviata con successo! Ti contatteremo presto.
+    </div>
+
     <!-- Contenuto della Pagina -->
     <main class="hero">
         <h1 class="title">La tua prossima app.<br>Semplice. Potente.</h1>
         <p class="subtitle">Scandaglia fiumi di file in secondi. Le tue mail sono qui, pronte ed ordinate.</p>
         
-        <a href="#" class="cta-btn">Scopri di più</a>
+        <!-- Pulsante aggiornato con evento JS -->
+        <button onclick="requestApp()" class="cta-btn">Richiedilo ora</button>
 
         <!-- Finestra Mockup con la tua PNG -->
         <div class="gui-container">
@@ -188,10 +220,28 @@
                 <div class="dot yellow"></div>
                 <div class="dot green"></div>
             </div>
-            <!-- NOTA: Sostituisci "la-tua-foto.png" con il nome esatto del tuo file PNG -->
             <img src="Emailextractor.png" alt="Anteprima dell'interfaccia" class="gui-image">
         </div>
     </main>
+
+    <script>
+        function requestApp() {
+            // Chiede l'email all'utente tramite un prompt del browser
+            const userEmail = prompt("Inserisci il tuo indirizzo email per richiedere l'accesso:");
+            
+            // Verifica che l'utente non abbia annullato o lasciato vuoto
+            if (userEmail !== null && userEmail.trim() !== "") {
+                // Mostra la notifica a comparsa a schermo (Stile iOS/macOS)
+                const notification = document.getElementById("notification");
+                notification.classList.add("show");
+                
+                // Nasconde la notifica dopo 4 secondi
+                setTimeout(() => {
+                    notification.classList.remove("show");
+                }, 4000);
+            }
+        }
+    </script>
 
 </body>
 </html>
